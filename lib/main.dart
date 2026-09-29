@@ -11,38 +11,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Sandwich Shop App",
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Center(child: Text("Sandwhich Counter")),
-          backgroundColor: const Color.fromARGB(255, 9, 237, 20),
-        ),
-
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            OrderItemDisplay(5, 'Footlong'),
-            Row(
-              children: [
-                ElevatedButton(
-                  // ignore: avoid_print
-                  onPressed: () => print('Add Button Pressed!'),
-                  child: const Text('Add'),
-                ),
-                const SizedBox(width: 16),
-                ElevatedButton(
-                  // ignore: avoid_print
-                  onPressed: () => print('Remove Button Pressed!'),
-                  child: const Text('Remove'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      home: OrderScreen(maxQuantity: 5),
       theme: ThemeData(
         colorScheme: .fromSeed(
           seedColor: const Color.fromARGB(255, 49, 255, 238),
@@ -68,7 +37,31 @@ class _OrderScreenState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Sandwich Counter')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            OrderItemDisplay(_quantity, 'Footlong'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => print('Add button pressed!'),
+                  child: const Text('Add'),
+                ),
+                SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: () => print('Remove button pressed!'),
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
