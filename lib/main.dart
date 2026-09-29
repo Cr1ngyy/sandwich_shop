@@ -28,11 +28,13 @@ class App extends StatelessWidget {
             Row(
               children: [
                 ElevatedButton(
+                  // ignore: avoid_print
                   onPressed: () => print('Add Button Pressed!'),
                   child: const Text('Add'),
                 ),
                 const SizedBox(width: 16),
                 ElevatedButton(
+                  // ignore: avoid_print
                   onPressed: () => print('Remove Button Pressed!'),
                   child: const Text('Remove'),
                 ),
@@ -47,6 +49,26 @@ class App extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class OrderScreen extends StatefulWidget {
+  final int maxQuantity;
+
+  const OrderScreen({super.key, this.maxQuantity = 10});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _OrderScreenState();
+  }
+}
+
+class _OrderScreenState extends State<OrderScreen> {
+  int _quantity = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
