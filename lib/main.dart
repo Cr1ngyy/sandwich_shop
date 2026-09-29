@@ -12,16 +12,39 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: "Sandwich Shop App",
       home: Scaffold(
-        appBar: AppBar(title: const Center(child: Text("Sandwhich Counter")),
-        backgroundColor: const Color.fromARGB(255, 9, 237, 20),
+        appBar: AppBar(
+          title: const Center(child: Text("Sandwhich Counter")),
+          backgroundColor: const Color.fromARGB(255, 9, 237, 20),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {},
-        child: const Icon(Icons.add)
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
         ),
-        body: const Center(child: OrderItemDisplay(5, 'philly cheese')),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            OrderItemDisplay(5, 'Footlong'),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () => print('Add Button Pressed!'),
+                  child: const Text('Add'),
+                ),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: () => print('Remove Button Pressed!'),
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 49, 255, 238))
+        colorScheme: .fromSeed(
+          seedColor: const Color.fromARGB(255, 49, 255, 238),
+        ),
       ),
     );
   }
