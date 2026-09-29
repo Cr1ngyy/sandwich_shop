@@ -9,7 +9,25 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      title: "Sandwich Shop App",
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Sandwhich Counter")),
+        body: const Center(child: Text("Welcome to the Sandwhich Shop!")),
+      ),
+    );
+  }
+}
+
+class OrderItemDisplay extends StatelessWidget {
+  final String ItemType;
+  final int quantity;
+
+  const OrderItemDisplay(this.quantity, this.ItemType, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("This is a placeholder for OrderItemDisplay");
   }
 }
 
