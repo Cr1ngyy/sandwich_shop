@@ -23,7 +23,7 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order ${widget.sandwich.name}'),
+        title: Text('Order ${widget.sandwich.name}'),
         backgroundColor: const Color.fromARGB(255, 255, 194, 250),
       ),
       backgroundColor: Color.fromARGB(255, 255, 229, 247),
