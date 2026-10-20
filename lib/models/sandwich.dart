@@ -4,6 +4,7 @@ class Sandwich {
   final String description;
   final double price;
   final String imagePath;
+  String get formattedPrice => '£${price.toStringAsFixed(2)}';
 
 
   const Sandwich({
