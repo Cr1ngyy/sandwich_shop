@@ -19,9 +19,8 @@ void main() {
 
       expect(find.text('0 Footlong Sub sandwich(es): '), findsOneWidget);
     });
-  });
 
-  testWidgets('displays three sandwiches with three emojis', 
+      testWidgets('displays three sandwiches with three emojis', 
   (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -33,4 +32,25 @@ void main() {
 
     expect(find.text('3 Footlong Sub sandwich(es): 🥪🥪🥪'), findsOneWidget);
   });
+  });
+
+  group('App smoke tests', () {
+    testWidgets('App displays MenuScreen as home', 
+    (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+      expect(find.byType(MenuScreen), findsOneWidget);
+    });
+
+    testWidgets('Display sandwich cards with names and prices',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+      expect(find.text('Footlong Sub'), findsOneWidget);
+      expect(find.text('£7.50'), findsOneWidget);
+      expect(find.text('Six-Inch Sub'), findsOneWidget);
+      expect(find.text('£4.50'), findsOneWidget);
+      expect(find.text('£4.50'), findsOneWidget);
+      expect(find.text('Order'), findsNWidgets(2));
+    });
+  });
 }
+

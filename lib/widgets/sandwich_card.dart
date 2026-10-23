@@ -53,7 +53,7 @@
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '£${sandwich.price.toStringAsFixed(2)}',
+              sandwich.formattedPrice,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
