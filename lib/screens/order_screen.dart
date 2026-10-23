@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sandwich_shop/models/sandwich.dart';
 
-
 class OrderScreen extends StatefulWidget {
   final Sandwich sandwich;
   final int maxQuantity;
 
-  const OrderScreen({super.key, 
-  required this.sandwich,
-  this.maxQuantity = 10});
+  const OrderScreen({super.key, required this.sandwich, this.maxQuantity = 10});
 
   @override
   State<StatefulWidget> createState() {

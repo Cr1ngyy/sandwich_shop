@@ -6,12 +6,11 @@ class Sandwich {
   final String imagePath;
   String get formattedPrice => '£${price.toStringAsFixed(2)}';
 
-
   const Sandwich({
-    required this.id, 
-    required this.name, 
-    required this.description, 
-    required this.price, 
-    required this.imagePath
-});
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.imagePath,
+  });
 }

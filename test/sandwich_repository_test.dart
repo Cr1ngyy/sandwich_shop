@@ -43,6 +43,5 @@ void main() {
 
       expect(sandwich, isNull);
     });
-    
   });
 }

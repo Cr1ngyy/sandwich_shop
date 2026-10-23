@@ -21,8 +21,8 @@ class MenuScreen extends StatelessWidget {
         itemCount: sandwiches.length,
         itemBuilder: (context, index) {
           return SandwichCard(sandwich: sandwiches[index]);
-        }
-      )
+        },
+      ),
     );
-    }
+  }
 }
