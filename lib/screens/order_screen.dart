@@ -73,6 +73,6 @@ class OrderItemDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("$quantity $itemType sandwhich(es): ${'🥪' * quantity}");
+    return Text("$quantity $itemType sandwich(es): ${'🥪' * quantity}");
   }
 }
