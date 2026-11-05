@@ -11,7 +11,7 @@ class SandwichCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      color: const Color.fromARGB(161, 250, 181, 255),
+      // color: const Color.fromARGB(161, 250, 181, 255),
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(

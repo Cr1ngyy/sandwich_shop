@@ -14,9 +14,9 @@ class MenuScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sandwich Menu'),
-        backgroundColor: const Color.fromARGB(255, 254, 74, 254),
+        // backgroundColor: const Color.fromARGB(255, 254, 74, 254),
       ),
-      backgroundColor: const Color.fromARGB(31, 243, 152, 250),
+      // backgroundColor: const Color.fromARGB(31, 243, 152, 250),
       body: ListView.builder(
         itemCount: sandwiches.length,
         itemBuilder: (context, index) {

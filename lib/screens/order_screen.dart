@@ -21,9 +21,9 @@ class _OrderScreenState extends State<OrderScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Order ${widget.sandwich.name}'),
-        backgroundColor: const Color.fromARGB(255, 255, 194, 250),
+        // backgroundColor: const Color.fromARGB(255, 255, 194, 250),
       ),
-      backgroundColor: Color.fromARGB(255, 255, 229, 247),
+      // backgroundColor: Color.fromARGB(255, 255, 229, 247),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
