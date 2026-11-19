@@ -21,6 +21,7 @@ class _BasketScreenState extends State<BasketScreen> {
   Widget build(BuildContext context) {
     final CartRepository cart = CartRepository.instance;
     final List<CartItem> items = cart.getItems();
+
     Widget _buildEmptyState() {
     return const Center(
       child: Padding(
@@ -33,30 +34,148 @@ class _BasketScreenState extends State<BasketScreen> {
     );
     }
 
-    final Widget content;
-    if (items.isEmpty) {
-      if (_confirmationMessage.isNotEmpty) {
-        content = Column(
-          children: [
-            _buildEmptyState(),
-            Text(_confirmationMessage),
-          ],
-        );
-      } else {
-        content = _buildEmptyState();
-      }
-    } else {
-      content = const Text('Basket list placeholder');
+    Widget _buildLineItem(CartRepository cart, CartItem item, int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${item.quantity} x ${item.sandwich.name}',
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 4),
+                Text('£${item.lineTotal.toStringAsFixed(2)}'),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete_outline, color: Colors.red),
+            onPressed: () {
+              setState(() {
+                cart.removeItem(index);
+              });
+            },
+          ),
+        ],
+      ),
+    );
     }
 
+    Widget _buildTotalRow(String label, String value, {bool emphasise = false}) {
+    final TextStyle style;
+    if (emphasise) {
+      style = const TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
+    } else {
+      style = const TextStyle(color: shopText);
+    }
 
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: style),
+          Text(value, style: style),
+        ],
+      ),
+    );
+    }
+
+    Widget _buildBasketList(CartRepository cart, List<CartItem> items) {
+      final List<Widget> children = [];
+
+      children.add(const Text('Your basket', style: shopSectionTitleStyle));
+      children.add(const SizedBox(height: 16));
+
+      for (int index = 0; index < items.length; index++) {
+        final CartItem item = items[index];
+        children.add(_buildLineItem(cart, item, index));
+      }
+      
+      children.add(const SizedBox(height: 24));
+      children.add(
+        _buildTotalRow(
+          'Items subtotal',
+          '£${cart.getSubtotal().toStringAsFixed(2)}',
+        ),
+      );
+      children.add(
+        _buildTotalRow(
+          'Delivery',
+          '£${cart.getDeliveryFee().toStringAsFixed(2)}',
+        ),
+      );
+      children.add(
+        _buildTotalRow(
+          'Total to pay',
+          '£${cart.getTotalDue().toStringAsFixed(2)}',
+          emphasise: true,
+        ),
+      );
+      children.add(const SizedBox(height: 24));
+
+      children.add(
+        SizedBox(
+          width: double.infinity,
+          child: PrimaryButton(
+            label: 'Checkout',
+            onPressed: () {
+              setState(() {
+                cart.clear();
+                _confirmationMessage = 'Thanks, your order is on its way';
+              });
+            },
+          ),
+        ),
+      );
+
+    if (_confirmationMessage.isNotEmpty) {
+      children.add(const SizedBox(height: 12));
+      children.add(
+        Text(
+          _confirmationMessage,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: children,
+    );
+    }
+
+    final Widget content;
+      if (items.isEmpty) {
+        if (_confirmationMessage.isNotEmpty) {
+          content = Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildEmptyState(),
+              const SizedBox(height: 12),
+              Text(
+                _confirmationMessage,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          );
+        } else {
+          content = _buildEmptyState();
+        }
+      } else {
+        content = _buildBasketList(cart, items);
+      }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(appTitle, style: shopHeaderStyle),
         actions: const [BasketButton()],
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: content,
       ),
