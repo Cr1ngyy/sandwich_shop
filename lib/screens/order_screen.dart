@@ -31,12 +31,16 @@ class _OrderScreenState extends State<OrderScreen> {
         // backgroundColor: const Color.fromARGB(255, 255, 194, 250),
       ),
       // backgroundColor: Color.fromARGB(255, 255, 229, 247),
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
+              Text('Order ${widget.sandwich.name}',
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
               OrderItemDisplay(_quantity, widget.sandwich.name),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -49,7 +53,9 @@ class _OrderScreenState extends State<OrderScreen> {
                     onPressed: () => _decreaseQuantity(),
                     child: const Text('Remove'),
                   ),
-                  const SizedBox(height: 24),
+                ],
+              ),
+              const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
                 child: PrimaryButton(
@@ -62,13 +68,10 @@ class _OrderScreenState extends State<OrderScreen> {
                 _confirmationMessage,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-                ],
-              ),
-            ],
-          ),
-        ),
+          ],
       ),
-    );
+      ),
+      );
   }
 
   void _increaseQuantity() {
