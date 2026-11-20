@@ -19,23 +19,57 @@ class _MenuScreenState extends State<MenuScreen> {
   String _errorMessage = '';
 
   @override
+  void initState() {
+    super.initState();
+    _loadSandwiches();
+  }
+
+  Future<void> _loadSandwiches() async {
+    try {
+      final SandwichRepository repository = SandwichRepository();
+      final List<Sandwich> sandwiches =
+          await repository.loadSandwichesFromAsset();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _sandwiches = sandwiches;
+        _loading = false;
+      });
+    } 
+    catch (error) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _errorMessage = 'Could not load the menu: $error';
+        _loading = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final SandwichRepository repository = SandwichRepository();
-    final List<Sandwich> sandwiches = repository.getSandwiches();
+    final Widget body;
+    if (_loading) {
+      body = const Center(child: CircularProgressIndicator());
+    } else if (_errorMessage.isNotEmpty) {
+      body = Center(child: Text(_errorMessage));
+    } else {
+      body = ListView.builder(
+        itemCount: _sandwiches.length,
+        itemBuilder: (BuildContext context, int index) {
+          return SandwichCard(sandwich: _sandwiches[index]);
+        },
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(appTitle, style: shopHeaderStyle),
         actions: const [BasketButton(), SettingsButton()],
-        // backgroundColor: const Color.fromARGB(255, 254, 74, 254),
       ),
-      // backgroundColor: const Color.fromARGB(31, 243, 152, 250),
-      body: ListView.builder(
-        itemCount: sandwiches.length,
-        itemBuilder: (BuildContext context, int index) {
-          return SandwichCard(sandwich: sandwiches[index]);
-        },
-      ),
-    );
+      body: body
+      );
   }
 }
