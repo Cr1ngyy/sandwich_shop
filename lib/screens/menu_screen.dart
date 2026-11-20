@@ -6,8 +6,17 @@ import 'package:sandwich_shop/constants.dart';
 import 'package:sandwich_shop/widgets/basket_button.dart';
 import 'package:sandwich_shop/widgets/settings_button.dart';
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  List<Sandwich> _sandwiches = [];
+  bool _loading = true;
+  String _errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
