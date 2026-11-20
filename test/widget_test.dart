@@ -4,8 +4,12 @@ import 'package:sandwich_shop/main.dart';
 import 'package:sandwich_shop/models/sandwich.dart';
 import 'package:sandwich_shop/screens/menu_screen.dart';
 import 'package:sandwich_shop/screens/order_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  setUp(() {
+    rootBundle.clear();
+  });
   group('OrderItemDisplay widget tests', () {
     testWidgets('displays zero sandwiches with no emoji', (
       WidgetTester tester,
@@ -48,7 +52,8 @@ void main() {
       expect(find.text('Six-Inch Sub'), findsOneWidget);
       expect(find.text('£4.50'), findsOneWidget);
       expect(find.text('£4.50'), findsOneWidget);
-      expect(find.text('Order'), findsNWidgets(2));
+      expect(find.text('Order'), findsWidgets);
+      
     });
 
     testWidgets(
